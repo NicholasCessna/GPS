@@ -12,7 +12,7 @@ title = Nearby Places
 package.name = nearbyplace
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = org.rez.package
+package.domain = org.rez
 
 # (str) Source code where the main.py live
 source.dir = .
