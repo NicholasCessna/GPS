@@ -1,188 +1,95 @@
 [app]
+
 # (str) Title of your application
-title = GPSApp
+title = My Application
 
 # (str) Package name
-package.name = gpsapp
+package.name = myapp
 
-# (str) Package domain (e.g., org.test)
-package.domain = org.example
+# (str) Package domain (needed for android/ios packaging)
+package.domain = org.test
 
-# (str) Source code where the main.py is located
+# (str) Source code where the main.py lives
 source.dir = .
 
+# (list) Source files to include (leave empty to include all files)
+source.include_exts = py,png,jpg,kv,atlas
+
+# (str) Application versioning
+version = 0.1
+
 # (list) Application requirements
-# Ensure all necessary modules are included
-requirements = python3,kivy,requests,geocoder,plyer
+# Adding all necessary requirements including Kivy, Plyer for Android APIs, and requests/geocoder
+requirements = python3,kivy,plyer,requests,geocoder
 
 # (str) Presplash of the application
-# presplash.filename = %(source.dir)s/data/presplash.png
+#presplash.filename = %(source.dir)s/data/presplash.png
 
 # (str) Icon of the application
-# icon.filename = %(source.dir)s/data/icon.png
+#icon.filename = %(source.dir)s/data/icon.png
 
-# (str) Supported orientation (one of landscape, portrait, or all)
+# (list) Supported orientations
 orientation = portrait
+
+#
+# Android specific
+#
 
 # (bool) Indicate if the application should be fullscreen or not
 fullscreen = 0
 
-# (list) Permissions required by the app
-# Ensure the app has access to the internet and fine location
-android.permissions = INTERNET,ACCESS_FINE_LOCATION
+# (list) Permissions needed by the application
+android.permissions = INTERNET, ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION
 
-# (int) Target Android API, should be as high as possible
-android.api = 31
+# (int) Target Android API level. Set this to 33 for Android 13
+android.api = 32
 
 # (int) Minimum API your APK will support
 android.minapi = 21
 
-# (str) Android NDK version to use
-# android.ndk = 23b
+# (str) Android SDK version to use
+android.sdk = 32
 
-# (bool) Enable AndroidX support
-# android.enable_androidx requires android.api >= 28
+# Add or update the following line
+android.ndk_path = ~/android-sdk/ndk/android-ndk-r25b
+
+# (str) Android NDK version to use
+android.ndk = 25b
+
+# (int) Android NDK API to use (minimum API your app will support)
+android.ndk_api = 21
+
+# (bool) Enable AndroidX support. Required for newer Android APIs.
 android.enable_androidx = True
 
-# (list) Gradle dependencies to add
-# android.gradle_dependencies =
-
-# (list) Add Java compile options
-# android.add_compile_options = "sourceCompatibility = 1.8", "targetCompatibility = 1.8"
-
-# (list) Gradle repositories to add
-# android.add_gradle_repositories =
-
-# (list) Packaging options to add
-# android.add_packaging_options =
-
-# (list) Java classes to add as activities to the manifest
-# android.add_activities =
-
-# (str) Adaptive icon of the application (used if Android API level is 26+ at runtime)
-# icon.adaptive_foreground.filename = %(source.dir)s/data/icon_fg.png
-# icon.adaptive_background.filename = %(source.dir)s/data/icon_bg.png
-
-# (list) Features (adds uses-feature tags to manifest)
-# android.features = android.hardware.usb.host
+# (list) The Android architectures to build for (ARM architectures are commonly used)
+android.archs = arm64-v8a, armeabi-v7a
 
 # (str) Android entry point, default is ok for Kivy-based app
-# android.entrypoint = org.kivy.android.PythonActivity
-
-# (str) Full name including package path of the Java class that implements Android Activity
-# android.activity_class_name = org.kivy.android.PythonActivity
-
-# (str) Extra XML to write directly inside the <manifest> element of AndroidManifest.xml
-# android.extra_manifest_xml = ./src/android/extra_manifest.xml
-
-# (str) Extra XML to write directly inside the <manifest><application> tag of AndroidManifest.xml
-# android.extra_manifest_application_arguments = ./src/android/extra_manifest_application_arguments.xml
-
-# (str) Full name including package path of the Java class that implements Python Service
-# android.service_class_name = org.kivy.android.PythonService
+android.entrypoint = org.kivy.android.PythonActivity
 
 # (str) Android app theme, default is ok for Kivy-based app
-# android.apptheme = "@android:style/Theme.NoTitleBar"
+android.apptheme = "@android:style/Theme.NoTitleBar"
 
-# (list) Pattern to whitelist for the whole project
-# android.whitelist =
+# (bool) Automatically accept SDK license agreements
+android.accept_sdk_license = True
 
-# (str) Path to a custom whitelist file
-# android.whitelist_src =
+# (list) Gradle dependencies to add (using androidx to enable modern Android features)
+android.gradle_dependencies = androidx.legacy:legacy-support-v4:1.0.0
 
-# (str) Path to a custom blacklist file
-# android.blacklist_src =
+# (bool) Enable or disable backup (useful for restoring app data)
+android.allow_backup = True
 
-# (list) List of Java .jar files to add to the libs so that pyjnius can access their classes
-# android.add_jars = foo.jar,bar.jar,path/to/more/*.jar
+# (str) The format used to package the app for release mode (aab or apk or aar)
+android.release_artifact = aab
 
-# (list) List of Java files to add to the android project (can be java or a directory containing the files)
-# android.add_src =
+# (str) The format used to package the app for debug mode (apk or aar)
+android.debug_artifact = apk
 
-# (list) Android AAR archives to add
-# android.add_aars =
-
-# (list) Put these files or directories in the apk assets directory
-# android.add_assets =
-
-# (list) Put these files or directories in the apk res directory
-# android.add_resources =
-
-# (bool) If True, then skip trying to update the Android SDK
-# android.skip_update = False
-
-# (bool) If True, then automatically accept SDK license agreements
-# android.accept_sdk_license = False
-
-# (bool) Use --private data storage (True) or --dir public storage (False)
-# android.private_storage = True
-
-# (str) Android NDK directory (if empty, it will be automatically downloaded.)
-# android.ndk_path =
-
-# (str) Android SDK directory (if empty, it will be automatically downloaded.)
-# android.sdk_path =
-
-# (str) ANT directory (if empty, it will be automatically downloaded.)
-# android.ant_path =
-
-# (str) Python-for-Android git clone directory (if empty, it will be automatically cloned from GitHub)
-# p4a.source_dir = /p4a
-
-# (str) The directory in which python-for-android should look for your own build recipes (if any)
-# p4a.local_recipes =
-
-# (str) Filename to the hook for p4a
-# p4a.hook =
-
-# (list) Python-for-Android whitelist
-# android.p4a_whitelist =
-
-# (str) Path to build artifact storage, absolute or relative to spec file
-# build_dir = ./.buildozer
-
-# (str) Path to build output (i.e., .apk, .ipa) storage
-# bin_dir = ./bin
+[buildozer]
 
 # (int) Log level (0 = error only, 1 = info, 2 = debug (with command output))
 log_level = 2
 
 # (int) Display warning if buildozer is run as root (0 = False, 1 = True)
-warn_on_root = 0
-
-# (list) List of services to declare
-# services = NAME:ENTRYPOINT_TO_PY,NAME2:ENTRYPOINT2_TO_PY
-
-# (str) Author of the application
-# author = Your Name
-
-# (str) License of the application
-# license = MIT
-
-# (str) Description of the application
-# description = Short description of your app
-
-# (str) URL of the application's website
-# url = http://example.com
-
-# (str) Email of the author
-# author.email = your.email@example.com
-
-# (str) Application versioning (method 1)
-version = 1.0
-
-# (str) Application versioning (method 2)
-# version.regex = __version__ = ['"](.*)['"]
-# version.filename = %(source.dir)s/main.py
-
-# (str) Custom source folders for requirements
-# Sets custom source for any requirements with recipes
-# requirements.source.kivy = ../../kivy
-
-# (list) Garden requirements
-# garden_requirements = mapview
-
-# (str) Presplash background color (for android toolchain)
-# Supported formats are: #RRGGBB, #AARRGGBB, or color names (e.g
-::contentReference[oaicite:0]{index=0}
- 
+warn_on_root = 1

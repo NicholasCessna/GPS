@@ -1,0 +1,7 @@
+certifi
+chardet
+geocoder
+idna
+plyer
+requests
+urllib3
