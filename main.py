@@ -4,7 +4,6 @@ from kivy.uix.boxlayout import BoxLayout
 import requests
 import os
 import geocoder
-from plyer import gps
 
 
 class GPSApp(App):
