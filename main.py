@@ -8,8 +8,20 @@ from plyer import gps
 class GPSApp(App):
     def build(self):
         self.label = Label(text="Waiting for GPS data...")
-        gps.configure(on_location=self.update_location)
-        gps.start()
+        layout = BoxLayout(orientation='vertical')
+        layout.add_widget(self.label)
+        
+        if platform == 'android':
+            self.request_android_permissions()
+            gps.start()
+            gps.configure(on_location=self.update_location)
+        else:
+            self.label.text = "GPS is not supported on this platform"
+
+        return layout
+
+    def request_android_permissions(self):
+        request_permissions([Permission.ACCESS_FINE_LOCATION, Permission.ACCESS_COARSE_LOCATION])
         return self.label
 
     def update_location(self, lat, lon):
